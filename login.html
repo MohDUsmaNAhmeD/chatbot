@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-app-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-auth-compat.min.js"></script>
+    <link rel="shortcut icon" href="https://th.bing.com/th/id/R.a6464ac70ec6ea9fd6c203cdfdbab3cb?rik=9ZSEBeflSrpT3A&pid=ImgRaw&r=0" type="image/x-icon">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            background: linear-gradient(to bottom, #1A1A2E, #16213E);
+            color: #fff;
+        }
+
+        @media (max-width: 860px) {
+            body {
+                flex-direction: column;
+            }
+        }
+
+        .right-container,
+        .left-container {
+            flex: 1;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 860px) {
+            .right-container,
+            .left-container {
+                flex: 1 0 auto;
+            }
+        }
+
+        .left-container {
+            background-image: url('OIP-removebg-preview (1) (1).png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .right-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 15px;
+            overflow: auto;
+            padding: 2rem;
+        }
+
+        .right-container__h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .right-container__p {
+            opacity: .7;
+            margin-bottom: 20px;
+        }
+
+        .right-container__input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, .3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .right-container__input:focus {
+            outline: none;
+            border-color: #0EA5E9;
+        }
+
+        .right-container__label {
+            margin-top: 20px;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .right-container__bottom-text {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, .7);
+        }
+
+        .right-container__bottom-text>strong {
+            color: #0EA5E9;
+            cursor: pointer;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .toggle-container {
+            margin: 24px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-box {
+            appearance: none;
+            width: 40px;
+            height: 20px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, .3);
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-box:checked {
+            background-color: #0EA5E9;
+        }
+
+        .toggle-box:checked::after {
+            transform: translateX(20px);
+        }
+
+        .toggle-box::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background-color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .btn {
+            background-color: #0EA5E9;
+            border: none;
+            width: 100%;
+            max-width: 350px;
+            border-radius: 8px;
+            padding: 15px 0;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0284C7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left-container">
+    </div>
+    <div class="right-container">
+        <div class="right-container__box">
+            <h2 class="right-container__h2">Nice to see you!</h2>
+            <p class="right-container__p">Enter your email and password to sign up</p>
+            <form id="signup-form" class="input-container">
+                <div>
+                    <label for="email" class="right-container__label">Email</label>
+                    <input type="email" id="email" class="right-container__input" name="email" placeholder="Your email address" required>
+                </div>
+                <div>
+                    <label for="password" class="right-container__label">Password</label>
+                    <input type="password" id="password" class="right-container__input" name="password" placeholder="Your password" required>
+                </div>
+                <div class="toggle-container">
+                    <input type="checkbox" id="remember-me" class="toggle-box" name="checkbox">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <button type="submit" class="btn">SIGN UP</button>
+            </form>
+            <p class="right-container__bottom-text">Already have an account? <strong>Sign In</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            // your firebase config
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get form element
+        const form = document.getElementById('signup-form');
+
+        // Add submit event listener
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    alert("Signed up successfully as " + user.email);
+                    window.location.href = "bot.html";
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert("Error: " + errorMessage);
+                });
+        });
+    </script>
+</body>
+
+</html>
